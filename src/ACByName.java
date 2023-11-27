@@ -1,4 +1,6 @@
+import java.io.File;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 /**
  * Print out the accessibility criteria by name.
@@ -15,17 +17,22 @@ public class ACByName {
   /**
    * Print out the accessiblity criteria by name.
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     // Create the heap
-    // TODO: Fix the Comparator.
     Heap<AccessibilityCriterion> criteria = 
-      new Heap<AccessibilityCriterion>((x,y) -> 0);
+      new Heap<AccessibilityCriterion>((x,y) -> x.title.compareTo(y.title));
+    File txtFile = new File("src/accessibility-criteria.txt");
+    Scanner sc = new Scanner(txtFile);
 
     // Add all the elements to the heap.
-    // TODO: Add the code.
+    while (sc.hasNext()) {
+      AccessibilityCriterion accessibilityTxt = new AccessibilityCriterion(sc.nextLine());
+      criteria.put(accessibilityTxt);
+    } // while
 
     // Get all the elements, printing them out as you go.
-    // TODO: Add the code.
+    while (!criteria.isEmpty()) {
+      System.out.println(criteria.get());
+    } // while
   } // main(String[])
-
 } // ACByName

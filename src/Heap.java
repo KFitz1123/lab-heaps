@@ -183,7 +183,23 @@ public class Heap<T> implements LinearStructure<T> {
    * necessary.
    */
   void heapDown(int i) {
-    // STUB
+    int max = -1;
+    if (left(i) < size){
+      if (this.priority.compare(this.values.get(i), this.values.get(left(i))) > 0) {
+          max = left(i);
+        }//if 
+    }//if
+
+    if (right(i) < size){
+      if (this.priority.compare(this.values.get(left(i)), this.values.get(right(i))) > 0) {
+          max = right(i);
+        }//if 
+    }// if 
+
+    if(max >= 0) {
+      ArrayUtils.swap(this.values, max, i);
+      heapDown(max);
+      }// if
   } // heapDown(i)
 
   /**
@@ -191,13 +207,17 @@ public class Heap<T> implements LinearStructure<T> {
    * with respect to its ancestors by swapping up as necessary.
    */
   void heapUp(int i) {
-    // STUB
+      if (this.priority.compare(this.values.get(i), this.values.get(parent(i))) < 0) {
+        ArrayUtils.swap(this.values, i, parent(i));
+        heapUp(parent(i));
+      }//if 
   } // heapUp(i)
 
   /**
    * Turn the underlying array into a heap.
    */
   void heapify() {
+   // heapifySamR();
     heapifyCLRS();
   } // heapify()
 
